@@ -66,7 +66,10 @@ isMessage=signal(false)
               this.message=response?.success
               this.isSuccess.set(true)
                 console.log(response?.hook)
-                 this.router.navigate(['../redirect-user',response?.hook],{relativeTo:this.route})
+                const usercredential={UACP:response?.hook, uac_id:response?.uac_id}
+                localStorage.setItem('user',JSON.stringify(usercredential))
+                // console.log(response)
+                 this.router.navigate(['../redirect-user'],{relativeTo:this.route})
             }else{
               this.message='Unknown error has occured'
             }

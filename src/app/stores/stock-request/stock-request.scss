@@ -1,0 +1,43 @@
+.req-no{
+    font-size: clamp(1vw,1.5vw,2vw);
+    padding: 10px;
+    margin: 10px;
+    border-radius: .3em;
+    border:1px solid  rgb(221, 221, 226);
+    overflow: hidden;
+    flex: 1;
+        max-width: calc(100% - 0%);
+        div{
+            margin: 10px;
+        }
+}
+.container{
+    display: flex;
+    width: 100%;
+}
+header{
+     font-size: clamp(1vw,1.5vw,2vw);
+     color: rgb(51, 50, 50);
+     padding: 10px;
+}
+#requestNumber{
+    width: 100%;
+        border:1px solid  rgb(221, 221, 226);
+         font-size: clamp(1vw,1.5vw,2vw);
+         box-shadow: 0px 0px 15px 3px lightgrey;
+         border-radius: .3em;
+         padding: 10px;
+         margin: 0px;
+}
+.multiple{
+        width: 98%;
+        border:1px solid  rgb(221, 221, 226);
+         font-size: clamp(1vw,1.5vw,2vw);
+         box-shadow: 0px 0px 15px 3px lightgrey;
+         border-radius: .3em;
+         padding: 10px;
+}
+.w{
+    display: block;
+    width: 60%;
+}

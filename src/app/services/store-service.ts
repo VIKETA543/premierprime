@@ -98,5 +98,41 @@ closeCreditInVoice=(data:any)=>{
    return this.http.post(this.url + '/stores/closeCreditInVoice', data,{ headers: new HttpHeaders().set('contentType', "application/json") })
 }
 
+load_store_request=(data:any)=>{
+    return this.http.post(this.url + '/stores/load_store_request', data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+}
 
+submitReques=(data:any)=>{
+    return this.http.post(this.url + '/stores/submitReques', data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+}
+
+find_store_request=(data:any)=>{
+    return this.http.post(this.url + '/stores/find_store_request', data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+}
+
+dropRequest=(data:any)=>{
+    return this.http.post(this.url + '/stores/dropRequest', data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+}
+
+
+findPending=(data:any)=>{
+    return this.http.post(this.url + '/stores/findPending',data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+}
+
+dropRequest_Item=(data:any)=>{
+    return this.http.post(this.url + '/stores/dropRequest_Item',data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+}
+
+load_store_request_history=(data:any)=>{
+  return this.http.post(this.url + '/stores/load_store_request_history', data,{ headers: new HttpHeaders().set('contentType', "application/json") })
+   
+}
+
+submitRequest=(data:any)=>{
+   return this.http.post(this.url + '/stores/submitRequest', data,{ headers: new HttpHeaders().set('contentType', "application/json") }) 
+}
+
+findPendingItem=(data:any)=>{
+   return this.http.post(this.url + '/stores/findPendingItem', data,{ headers: new HttpHeaders().set('contentType', "application/json") }) 
+}
 }

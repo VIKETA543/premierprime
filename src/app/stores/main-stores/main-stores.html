@@ -1,17 +1,25 @@
 <div class="card">
     <p-toolbar>
         <ng-template #start>
-
+            <div class="flex-auto">
+                <p-avatar image="{{userInfo[0]?.passport_picture_url ||0}}" class="mr-2" size="xlarge" shape="circle" />
+            </div>
+            <div class="flex-auto">
+                <span>
+                    {{userInfo[0]?.fullname}}
+                </span>
+            </div>
         </ng-template>
         <ng-template #center>
 
         </ng-template>
         <ng-template #end>
-            <p-button icon="pi pi-ellipsis-v" class="mr-2" text severity="secondary" (onClick)="rightaside.set(true)" />
+            <p-button icon="pi pi-ellipsis-v" class="mr-2" text severity="secondary" (onClick)="op.toggle($event)" />
         </ng-template>
     </p-toolbar>
 </div>
-<p-drawer [(visible)]="rightaside" [modal]="true" [dismissible]="true" [blockScroll]="false" position="right">
+  <div class="card flex justify-center">
+            <p-popover #op>
     <div class="card flex justify-center gap-4">
         <p-button label="New Product" icon="pi pi-star" severity="secondary" (onClick)="newProduct()" serverity="info"
             variant="text" />
@@ -22,12 +30,20 @@
             serverity="info" variant="text" />
     </div>
 
-<div class="card flex justify-center gap-4">
+    <div class="card flex justify-center gap-4">
         <p-button label="Product Brand (Type)" icon="pi pi-star" severity="secondary" (onClick)="goToBrands()"
             serverity="info" variant="text" />
     </div>
 
 
+    <div class="card flex justify-center gap-4">
+        <p-button label="Stock Request" icon="pi pi-star" severity="secondary" (onClick)="goToStoctrequest()"
+            serverity="info" variant="text" />
+    </div>
+
+
+
+    
     <div class="card flex justify-center gap-4">
         <p-button label="Receive Stock" icon="store" severity="secondary" (onClick)="recieveStock()" serverity="info"
             variant="text" />
@@ -42,8 +58,8 @@
             variant="text" />
     </div>
     <div class="card flex justify-center gap-4">
-        <p-button label="Items Verified" icon="store" severity="secondary" (onClick)="verifiedRecords()" serverity="info"
-            variant="text" />
+        <p-button label="Items Verified" icon="store" severity="secondary" (onClick)="verifiedRecords()"
+            serverity="info" variant="text" />
     </div>
     <div class="card flex justify-center gap-4">
         <p-button label="Verification History" icon="store" severity="secondary" (onClick)="verifiedHistory()"
@@ -53,7 +69,9 @@
         <p-button label="Stock Balances" icon="store" severity="secondary" (onClick)="StockBalances()" serverity="info"
             variant="text" />
     </div>
-</p-drawer>
+    </p-popover>
+        </div>
+    
 <div id="routercontainer">
     <router-outlet></router-outlet>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
@@ -10,68 +10,85 @@ import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageModule } from 'primeng/message';
+import { isPlatformBrowser } from '@angular/common';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'redirect-user',
-  imports: [PanelModule,InputTextModule, FormsModule,ButtonModule,DividerModule,MessageModule,PasswordModule],
+  imports: [PanelModule, InputTextModule, FormsModule, ButtonModule, DividerModule, MessageModule, PasswordModule],
   templateUrl: './redirect-user.html',
   styleUrl: './redirect-user.scss',
+  providers:[MessageService],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class RedirectUser implements OnInit {
-RedirectKey:any
-decrptedKey:any
-uacp:any
-decriptedKey:any
-message:any
-private Key=environment.uacp_enc_key
-constructor(private userservice:Userservice, private router:Router,private routes:ActivatedRoute){
+  messageservice=inject(MessageService)
+  RedirectKey: any
+  decrptedKey: any
+  uacp: any
+  decriptedKey: any
+  message: any
+  success:any
+  private Key = environment.uacp_enc_key
+  constructor(private userservice: Userservice, 
+    private router: Router, 
+    private routes: ActivatedRoute,
+  @Inject(PLATFORM_ID) private platformId: Object) {
 
-this.uacp = this.routes.snapshot.paramMap.get('uacp');
-console.log('the UACP', this.uacp)
-}
+    if (isPlatformBrowser(this.platformId)) {
+       this.uacp=localStorage.getItem('UACP');
+    }
+
+    // console.log('the UACP', this.uacp)
+  }
   ngOnInit(): void {
 
   }
 
   decrypt(encryptedData: string): string {
     const bytes = CryptoJS.AES.decrypt(encryptedData, this.Key);
-console.log(bytes.toString(CryptoJS.enc.Utf8))
-    return  this.decriptedKey= bytes.toString(CryptoJS.enc.Utf8);
+
+    return this.decriptedKey = bytes.toString(CryptoJS.enc.Utf8);
   }
 
+  authUser = () => {
 
-  authUser=()=>{
     this.decrypt(this.uacp)
-     if(this.decriptedKey.match(this.RedirectKey)){
-      console.log('Key Match complete')
-      
-     }else{
-      this.message='Invalid Access key'
+          // console.log('The decryoted Key=>', this.decriptedKey)
+          //       console.log('the Raw key:' +this.RedirectKey)
+    if (this.decriptedKey===this.RedirectKey) {
+  
+      let data = {
+        hrid: this.uacp
+      }
+
+      this.userservice.authrole(data).subscribe((response: any) => {
+        console.log(response)
+        if (response?.message) {
+          this.message = response?.message
+        } else {
+          if (response.success) {
+            // console.log(response?.data)
+            // console.log(response?.success)
+            const redirector = response?.data[0]?.login_redirect
+            console.log(redirector)
+            switch (redirector.trim()) {
+              case "MAIN STORE":
+                this.success=response?.success
+                this.router.navigate(['main-stores']);
+                break;
+              default:
+                console.log('Unknown module')
+                this.message = response?.message
+                break
+            }
+          } else {
+            this.message = response?.message
+          }
+        }
+      })
+    } else {
+      this.message = ' invalid UACP key. Use a valid UCP assigned to you by admin'
       console.log(this.message)
-     }
-     let data={
-      hrid:this.uacp
-     }
-this.userservice.authrole(data).subscribe((response:any)=>{
-  console.log(response)
-  if(response?.message){
-this.message=response?.message
-  }else{
-if(response.success){
-  console.log(response?.data)
-  console.log(response?.success)
-  const redirector=response?.data[0]?.login_redirect
-  console.log(redirector)
-switch(redirector.trim()){
-  case "MAIN STORE":
-    this.router.navigate(['main-stores']);
-  break;
-  default :
-  console.log('Unknown module')
-}
-}else{
-  this.message=response?.message
-}
-  }
-})
+    }
   }
 }

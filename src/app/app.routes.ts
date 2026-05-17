@@ -47,6 +47,7 @@ import { SignUp } from './userAuth/sign-up/sign-up';
 import { UserLogin } from './userAuth/user-login/user-login';
 import { Auth } from './userAuth/auth/auth';
 import { RedirectUser } from './userAuth/redirect-user/redirect-user';
+import { StockRequest } from './stores/stock-request/stock-request';
 
 
 
@@ -157,6 +158,7 @@ export const routes: Routes = [
             { path: 'create-products', component: CreateProducts },
             { path: 'product-category', component: ProductCategory },
              { path: 'productbrand', component: Productbrand },
+             {path:'stock-request',component:StockRequest},
             {
                 path: 'verify-sales', component: VerifySales, children: [
                     { path: 'verify-cash-sales', component: VerifyCashSales },
@@ -191,7 +193,7 @@ export const routes: Routes = [
             { path: 'sign-up', component: SignUp },
             { path: 'user-login', component: UserLogin },
             { path: 'auth/:uac', component: Auth },
-            { path: 'redirect-user/:uacp', component: RedirectUser }
+            { path: 'redirect-user', component: RedirectUser }
         ]
     },
 

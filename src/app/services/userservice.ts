@@ -49,4 +49,7 @@ export class Userservice {
 
   return this.http.post(this.url + '/user/authrole',data, { headers: new HttpHeaders().set('contentType',  "application/json") });
   }
+  getUser=(data:any)=>{
+      return this.http.post(this.url + '/user/loadUserInformation',data, { headers: new HttpHeaders().set('contentType',  "application/json") });
+  }
 }
