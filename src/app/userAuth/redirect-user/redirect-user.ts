@@ -28,6 +28,7 @@ export class RedirectUser implements OnInit {
   decriptedKey: any
   message: any
   success:any
+  user:any
   private Key:string='Mvk2@@#3011~43011'
   constructor(private userservice: Userservice, 
     private router: Router, 
@@ -35,7 +36,8 @@ export class RedirectUser implements OnInit {
   @Inject(PLATFORM_ID) private platformId: Object) {
 
     if (isPlatformBrowser(this.platformId)) {
-       this.uacp=localStorage.getItem('user');
+      this.user=localStorage.getItem('user');
+       this.uacp =user.UACP
       console.log('UACP',this.uacp)
     }
 
