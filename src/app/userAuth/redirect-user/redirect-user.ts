@@ -36,6 +36,7 @@ export class RedirectUser implements OnInit {
 
     if (isPlatformBrowser(this.platformId)) {
        this.uacp=localStorage.getItem('UACP');
+      console.log('U2FsdGVkX188OEb+InrJuHFwGA7TfNmidUcFNk51EGzm8EUtv4+/O1KDe+DG61CC')
     }
 
     // console.log('the UACP', this.uacp)
