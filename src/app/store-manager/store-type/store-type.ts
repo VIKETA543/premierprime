@@ -77,7 +77,7 @@ export class StoreType implements OnInit {
 
   constructor(private storeservice: StoreService, private messageservice: MessageService) {
 
-    // this.newstrIdentity()
+     this.newstrIdentity()
     this.liststoretypes()
   }
 
