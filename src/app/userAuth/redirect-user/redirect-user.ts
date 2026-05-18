@@ -36,7 +36,7 @@ export class RedirectUser implements OnInit {
   @Inject(PLATFORM_ID) private platformId: Object) {
 
     if (isPlatformBrowser(this.platformId)) {
-      this.user=localStorage.getItem('user');
+      this.user=JSON.parse(localStorage.getItem('user'));
        this.uacp =user.UACP
       console.log('UACP',this.uacp)
     }
