@@ -28,7 +28,7 @@ export class RedirectUser implements OnInit {
   decriptedKey: any
   message: any
   success:any
-  private Key = environment.uacp_enc_key
+  private Key:string='Mvk2@@#3011~43011'
   constructor(private userservice: Userservice, 
     private router: Router, 
     private routes: ActivatedRoute,
