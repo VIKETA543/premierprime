@@ -100,7 +100,7 @@ export class StoreType implements OnInit {
   }
   saveStoreIdentity() {
     let data = {
-      storeIdentityID: this.isstrIdentity,
+      storeIdentityID: this.storeTypeId ,
       storeIdentityName: this.stridentityName,
       storeidenetityDesc: this.stridentitydescription,
       dateposeted: new Date()
